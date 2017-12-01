@@ -1,0 +1,16 @@
+name: ${name}
+version: ${version}
+description: ${description}
+author: ${author}
+website: ${url}
+
+main: ${mainClass}
+
+commands:
+  getcreaturecatcher:
+    description: Gets the test mobcatcher thing
+    usage: /<command>
+permissions:
+  creaturecatcher.catchothers:
+    description: permission to capture and place mobs owned by other players
+    default: Op
