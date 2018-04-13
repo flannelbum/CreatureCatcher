@@ -42,7 +42,7 @@ public class CreatureCatcherListener implements Listener {
 		
 		if( e.getHand().equals(EquipmentSlot.HAND) )
 			if( CaughtCreatureFactory.validEntityType( entity ) ) 
-				if( plugin.isMobCaptureItem( item ) ) 
+				if( plugin.isCreatureCaptureItem( item ) ) 
 					if( plugin.isEmptyCaptureItem( item )) {
 						e.setCancelled(true);
 						/**
@@ -69,7 +69,7 @@ public class CreatureCatcherListener implements Listener {
 		Player player = e.getPlayer();
 		ItemStack item = player.getInventory().getItemInMainHand();
 
-		if( plugin.isMobCaptureItem( item ) ) {
+		if( plugin.isCreatureCaptureItem( item ) ) {
 			// prevent any action from this item by canceling this event
 			e.setCancelled(true);
 

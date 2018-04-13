@@ -40,7 +40,7 @@ public class CreatureCatcherCommand implements CommandExecutor {
 						sender.sendMessage("Must supply username to reset");
 				
 			} else if( isOP ) 
-				player.getInventory().addItem( plugin.getMobCatcher() );
+				player.getInventory().addItem( plugin.getCreatureCatcherItem() );
 
 			return true;
 		}
@@ -51,14 +51,14 @@ public class CreatureCatcherCommand implements CommandExecutor {
 
 
 		if( plugin.getTestPlayerHandler().isAlreadyTestPlayer( player.getUniqueId().toString() )){
-			player.sendMessage("You've already spawned a test mobcatcher");
+			player.sendMessage("You've already spawned a test creaturecatcher item!");
 			return true;
 		}
 
 		
 		player.sendMessage("REMEMBER: This test creaturecatcher item cannot be spawned again and is subject to change at any time.");
 		player.sendMessage("Thank you for helping test it out!");
-		player.getInventory().addItem( plugin.getMobCatcher() );
+		player.getInventory().addItem( plugin.getCreatureCatcherItem() );
 		plugin.getTestPlayerHandler().addTestplayer(player.getUniqueId());
 		
 		return true;

@@ -27,7 +27,7 @@ public class TestPlayerHandler {
 	
 	public List<String> getTestPlayers(){
 		if( testPlayersList == null )
-			testPlayersList = plugin.getConfig().getStringList("mobcatcher.testplayers");
+			testPlayersList = plugin.getConfig().getStringList("creaturecatcher.testplayers");
 		if( testPlayersList == null )
 			testPlayersList = new ArrayList<String>();
 		return testPlayersList;
@@ -37,7 +37,7 @@ public class TestPlayerHandler {
 		UUID uuid = getUUIDforPlayername(playername); 
 		if( uuid != null )
 			if( testPlayersList.remove( uuid.toString() )){
-				plugin.getConfig().set("mobcatcher.testplayers", testPlayersList);
+				plugin.getConfig().set("creaturecatcher.testplayers", testPlayersList);
 				plugin.saveConfig();
 				sender.sendMessage("reset " + playername);
 				return;
@@ -47,7 +47,7 @@ public class TestPlayerHandler {
 	
 	public void addTestplayer(UUID uuid) { 
 		testPlayersList.add( uuid.toString() ); 
-		plugin.getConfig().set("mobcatcher.testplayers", testPlayersList);
+		plugin.getConfig().set("creaturecatcher.testplayers", testPlayersList);
 		plugin.saveConfig();
 	}
 	

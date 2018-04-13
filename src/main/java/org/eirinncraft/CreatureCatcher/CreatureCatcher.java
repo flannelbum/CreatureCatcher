@@ -77,7 +77,7 @@ public class CreatureCatcher extends JavaPlugin{
 			lore = new ArrayList<String>();
 			lore.add("CreatureCatcher");
 			lore.add("");
-			lore.add("Testing the MobCatcher");
+			lore.add("Test CreatureCatcher");
 			lore.add("Item subject to change");
 			lore.add("There may be bugs!");
 		}
@@ -85,7 +85,7 @@ public class CreatureCatcher extends JavaPlugin{
 	}
 	
 	
-	public boolean isMobCaptureItem(ItemStack item) {
+	public boolean isCreatureCaptureItem(ItemStack item) {
 		if( item.getType().equals(Material.WOOD_HOE) )
 			if( item.hasItemMeta() )
 				if( item.getItemMeta().hasLore() )					
@@ -109,7 +109,7 @@ public class CreatureCatcher extends JavaPlugin{
 	}
 
 	
-	public ItemStack getMobCatcher() {
+	public ItemStack getCreatureCatcherItem() {
 		ItemStack item = new ItemStack(Material.WOOD_HOE);
 		ItemMeta meta = item.getItemMeta();
 
@@ -127,7 +127,7 @@ public class CreatureCatcher extends JavaPlugin{
 	}
 	
 	//OVERLOAD with displayname and token
-	public ItemStack getMobCatcher(String displayname, String token){
+	public ItemStack getCreatureCatcherItem(String displayname, String token){
 		ItemStack item = new ItemStack(Material.WOOD_HOE);
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
@@ -177,7 +177,7 @@ public class CreatureCatcher extends JavaPlugin{
 		
 		entity.remove();
 
-		player.getInventory().setItemInMainHand( getMobCatcher(creature.getDisplayName(), creature.getToken()) );
+		player.getInventory().setItemInMainHand( getCreatureCatcherItem(creature.getDisplayName(), creature.getToken()) );
 		
 		log(player.getName() + " made token: " + creature.getToken() + " (" + creature.getType() + "): " + creature.getDisplayName());
 
@@ -200,7 +200,7 @@ public class CreatureCatcher extends JavaPlugin{
 			log(player.getName() + " used token: " + token + " (" + creature.getType() + "): " + creature.getDisplayName());
 			
 			db.deleteCreature(token);
-			player.getInventory().setItemInMainHand(getMobCatcher());
+			player.getInventory().setItemInMainHand(getCreatureCatcherItem());
 			
 		} else {
 			log("CREATURE RESTORE ISSUE: " + player.getName() + " tried to restore token: " + token);
