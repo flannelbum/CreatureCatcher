@@ -164,7 +164,7 @@ public class CreatureCatcher extends JavaPlugin{
 				if( ((Tameable) entity).getOwner() != null )
 					if( !((Tameable) entity).getOwner().getUniqueId().equals( player.getUniqueId() ) )
 						if( !player.hasPermission("creaturecatcher.catchothers") ){
-							player.sendMessage("You do not own this creature");
+							player.sendMessage(((Tameable) entity).getOwner().getName() + "'s creature.  You may not capture it.");
 							return;
 						} 
 
