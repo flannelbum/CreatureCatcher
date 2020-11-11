@@ -12,6 +12,8 @@ class StoreMerchantRecipe {
 	private String ingredients;
 	private int uses;
 	private int maxUses;
+	private int villagerExperience;
+	private float priceMultiplier;
 	@Accessors(fluent = true)
 	private boolean experienceReward;
 }

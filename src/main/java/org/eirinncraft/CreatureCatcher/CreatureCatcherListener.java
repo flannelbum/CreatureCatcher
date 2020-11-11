@@ -31,7 +31,7 @@ public class CreatureCatcherListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent e){
-		
+		plugin.log("hit me with that onPlayerInteractEntityEvent!");
 		if( e.isCancelled() )
 			return;
 		

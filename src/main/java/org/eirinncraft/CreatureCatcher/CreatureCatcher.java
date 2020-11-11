@@ -86,7 +86,7 @@ public class CreatureCatcher extends JavaPlugin{
 	
 	
 	public boolean isCreatureCaptureItem(ItemStack item) {
-		if( item.getType().equals(Material.WOOD_HOE) )
+		if( item.getType().equals(Material.WOODEN_HOE) )
 			if( item.hasItemMeta() )
 				if( item.getItemMeta().hasLore() )					
 					if( getLore().get(0).equals(item.getItemMeta().getLore().get(0)) )
@@ -96,7 +96,7 @@ public class CreatureCatcher extends JavaPlugin{
 	
 
 	public boolean isEmptyCaptureItem(ItemStack item){
-		if( item.getType().equals(Material.WOOD_HOE) )
+		if( item.getType().equals(Material.WOODEN_HOE) )
 			if( item.hasItemMeta() )
 				if( item.getItemMeta().hasLore() ) {
 					// If we have an extra line in our lore, it should be our token
@@ -110,7 +110,7 @@ public class CreatureCatcher extends JavaPlugin{
 
 	
 	public ItemStack getCreatureCatcherItem() {
-		ItemStack item = new ItemStack(Material.WOOD_HOE);
+		ItemStack item = new ItemStack(Material.WOODEN_HOE);
 		ItemMeta meta = item.getItemMeta();
 
 		meta.setLore( getLore() );
@@ -128,7 +128,7 @@ public class CreatureCatcher extends JavaPlugin{
 	
 	//OVERLOAD with displayname and token
 	public ItemStack getCreatureCatcherItem(String displayname, String token){
-		ItemStack item = new ItemStack(Material.WOOD_HOE);
+		ItemStack item = new ItemStack(Material.WOODEN_HOE);
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
 		

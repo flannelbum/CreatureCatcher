@@ -94,7 +94,7 @@ public class CaughtCreatureFactory {
 			case GHAST: return true;
 			case MUSHROOM_COW: return true;
 			case OCELOT: return true;
-			case PIG_ZOMBIE: return true;
+//			case PIG_ZOMBIE: return true;
 			case POLAR_BEAR: return true;
 			case SHULKER: return true;
 			case SILVERFISH: return true;
