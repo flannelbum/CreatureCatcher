@@ -11,8 +11,6 @@ import org.bukkit.entity.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-//import org.bukkit.loot.LootTable;
-//import org.bukkit.loot.Lootable;
 
 
 public abstract class CaughtCreature {
@@ -24,12 +22,6 @@ public abstract class CaughtCreature {
 	@Getter
 	private HashMap<Attribute,Double> attributeMap = new HashMap<Attribute,Double>();
 
-//	//Lootable
-//	@Getter
-//	private LootTable loottable;
-//	@Getter
-//	private long lootseed;
-	
 	//Ageable
 	@Getter 
 	private int age;
@@ -79,12 +71,6 @@ public abstract class CaughtCreature {
 				attributeMap.put( attribute, creature.getAttribute( attribute ).getBaseValue() );
 			}
 
-//		//Lootable
-//		if( creature instanceof Lootable){
-//			this.loottable = ((Lootable) creature).getLootTable();
-//			this.lootseed = ((Lootable) creature).getSeed();
-//		}
-		
 		//Ageable
 		if( creature instanceof Ageable ){
 			this.age = ((Ageable) creature).getAge();
@@ -135,12 +121,6 @@ public abstract class CaughtCreature {
 		location.setZ( location.getZ() +.5);
 		
 		Entity entity = location.getWorld().spawnEntity(location, type);
-
-//		//Lootable
-//		if( entity instanceof Lootable ){
-//			((Lootable) entity).setLootTable(loottable);
-//			((Lootable) entity).setSeed(lootseed);
-//		}
 
 		//Ageable
 		if( entity instanceof Ageable ){

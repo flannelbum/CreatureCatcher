@@ -7,7 +7,6 @@ import java.util.List;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Villager;
-import org.bukkit.entity.Villager.Profession;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.eirinncraft.CreatureCatcher.Creatures.StoreMerchantRecipe.StoreMerchantRecipeBuilder;
@@ -18,7 +17,7 @@ import lombok.Getter;
 public class CaughtVillager extends CaughtCreature {
 
 	@Getter 
-	private Profession profession;
+	private Villager.Profession profession;
 	@Getter
 	private Villager.Type villagerType;
 	@Getter

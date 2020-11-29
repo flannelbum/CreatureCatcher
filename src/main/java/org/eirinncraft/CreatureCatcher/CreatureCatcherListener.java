@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -31,40 +32,41 @@ public class CreatureCatcherListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent e){
-		plugin.log("hit me with that onPlayerInteractEntityEvent!");
 		if( e.isCancelled() )
 			return;
-		
+
 		Player player = e.getPlayer();
 		Location location = player.getLocation().clone();
 		ItemStack item = player.getInventory().getItemInMainHand();
 		Entity entity = e.getRightClicked();
-		
+
 		if( e.getHand().equals(EquipmentSlot.HAND) )
-			if( CaughtCreatureFactory.validEntityType( entity ) ) 
-				if( plugin.isCreatureCaptureItem( item ) ) 
+			if( CaughtCreatureFactory.validEntityType( entity ) )
+				if( plugin.isCreatureCaptureItem( item ) )
 					if( plugin.isEmptyCaptureItem( item )) {
+						plugin.log("hit me with that onPlayerInteractEntityEvent!");
 						e.setCancelled(true);
 						/**
-						 * Mounting a horse causes the player's view to change despite canceling 
+						 * Mounting a horse causes the player's view to change despite canceling
 						 * this event (or testing with EntityMountEvent/interactat and other type events)
-						 * 
+						 *
 						 * So, if it's a horse, just tp the player to the postion we cloned above.
 						 * It's a little glitchy but it's better than getting spun around.
 						 */
 						if( entity instanceof AbstractHorse )
 							player.teleport(location, TeleportCause.PLUGIN);
-						
+
 						plugin.captureEntity(player, entity);
 				}
-				
+
 	}
 	
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent e){
-		
-		if( e.isCancelled() )
-			return;
+
+		if( e instanceof Cancellable )
+			if( ((Cancellable) e).isCancelled() )
+				return;
 		
 		Player player = e.getPlayer();
 		ItemStack item = player.getInventory().getItemInMainHand();

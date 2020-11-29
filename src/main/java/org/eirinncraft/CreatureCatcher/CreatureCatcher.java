@@ -1,5 +1,6 @@
 package org.eirinncraft.CreatureCatcher;
 
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.eirinncraft.CreatureCatcher.Creatures.CaughtCreature;
@@ -119,10 +120,11 @@ public class CreatureCatcher extends JavaPlugin{
 
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-		
+
+		((Damageable) meta).setDamage((short) 1);
+
 		item.setItemMeta(meta);
-		item.setDurability((short) 1);
-		
+
 		return item;
 	}
 	
@@ -145,8 +147,9 @@ public class CreatureCatcher extends JavaPlugin{
 		meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS);
 
+		((Damageable) meta).setDamage((short) 2);
+
 		item.setItemMeta(meta);
-		item.setDurability((short) 2);
 		
 		return item;
 	}
