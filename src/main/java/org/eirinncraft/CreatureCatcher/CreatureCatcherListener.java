@@ -18,8 +18,8 @@ public class CreatureCatcherListener implements Listener {
 
 	private CreatureCatcher plugin;
 	
-	public CreatureCatcherListener(CreatureCatcher mobCatcher) {
-		this.plugin = mobCatcher;
+	public CreatureCatcherListener(CreatureCatcher plugin) {
+		this.plugin = plugin;
 	}
 	
 	

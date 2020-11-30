@@ -28,19 +28,30 @@ public class CreatureCatcher extends JavaPlugin{
 	private CreatureCatcherListener ccListener;
 	private List<String> lore;
 	private Database db;
+
+	private int cmodelEmpty;
+	private int cmodelFull;
 	
 	private TestPlayerHandler tph;
 	
 	@Override
 	public void onEnable() {
-		
-		// force config save to ensure we have a folder for our database file
+
+		// some default config stuff before database stuff
+		this.cmodelEmpty = getConfig().getInt("creaturecatcher.CustomModelData.creature_catcher_empty");
+		this.cmodelFull = getConfig().getInt("creaturecatcher.CustomModelData.creature_catcher_full");
+		if( this.cmodelEmpty == 0 )
+			this.cmodelEmpty = 110401;
+		if( this.cmodelFull == 0 )
+			this.cmodelFull = 110402;
+		getConfig().set("creaturecatcher.CustomModelData.creature_catcher_empty", this.cmodelEmpty);
+		getConfig().set("creaturecatcher.CustomModelData.creature_catcher_full", this.cmodelFull);
 		saveConfig();
-		
+
+		// database stuff
 		db = new SQLite(this);
-		
+
 		getServer().getPluginManager().registerEvents(getCreatureCatcherListener(), this);
-		
 		getCommand("getcreaturecatcher").setExecutor(new CreatureCatcherCommand(this));
 			
 		log("enabled");
@@ -48,7 +59,7 @@ public class CreatureCatcher extends JavaPlugin{
 	
 	@Override
 	public void onDisable() {
-		
+
 		getConfig().set("creaturecatcher.testplayers", getTestPlayerHandler().getTestPlayers());
 		saveConfig();
 
@@ -76,8 +87,6 @@ public class CreatureCatcher extends JavaPlugin{
 	public List<String> getLore() {
 		if( lore == null ){
 			lore = new ArrayList<String>();
-			lore.add("CreatureCatcher");
-			lore.add("");
 			lore.add("Catch and Release");
 			lore.add("them creatures!");
 		}
@@ -120,7 +129,7 @@ public class CreatureCatcher extends JavaPlugin{
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
 
-		meta.setCustomModelData(110401);
+		meta.setCustomModelData(this.cmodelEmpty);
 
 		item.setItemMeta(meta);
 
@@ -140,13 +149,13 @@ public class CreatureCatcher extends JavaPlugin{
 		lore.add( token );
 		meta.setLore( lore );
 		
-		meta.setDisplayName("CreatureCatcher - " + displayname);
+		meta.setDisplayName("Caught: " + displayname);
 
 		meta.setUnbreakable(true);
 		meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS);
 
-		meta.setCustomModelData(110402);
+		meta.setCustomModelData(this.cmodelFull);
 
 		item.setItemMeta(meta);
 		

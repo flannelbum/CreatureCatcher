@@ -51,13 +51,12 @@ public class CreatureCatcherCommand implements CommandExecutor {
 
 
 		if( plugin.getTestPlayerHandler().isAlreadyTestPlayer( player.getUniqueId().toString() )){
-			player.sendMessage("You've already spawned a test creaturecatcher item!");
+			player.sendMessage("You've already spawned a Creature Catcher");
 			return true;
 		}
 
 		
-		player.sendMessage("REMEMBER: This test creaturecatcher item cannot be spawned again and is subject to change at any time.");
-		player.sendMessage("Thank you for helping test it out!");
+		player.sendMessage("A Creature Catcher appears for you");
 		player.getInventory().addItem( plugin.getCreatureCatcherItem() );
 		plugin.getTestPlayerHandler().addTestplayer(player.getUniqueId());
 		
