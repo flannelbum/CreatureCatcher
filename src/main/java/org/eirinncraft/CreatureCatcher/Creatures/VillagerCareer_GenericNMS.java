@@ -156,14 +156,14 @@ public class VillagerCareer_GenericNMS implements VillagerCareerInterface {
 			default: displayName = "Librarian"; break;
 			case 2: displayName = "Cartographer"; break;
 			} break;
-		case PRIEST:
-			displayName = "Cleric"; break;
-		case BLACKSMITH:
-			switch( careerID ) {
-			default: displayName = "Armorer"; break;
-			case 2: displayName = "Weapon Smith"; break;
-			case 3: displayName = "Tool Smith"; break;
-			} break;
+//		case PRIEST:
+//			displayName = "Cleric"; break;
+//		case BLACKSMITH:
+//			switch( careerID ) {
+//			default: displayName = "Armorer"; break;
+//			case 2: displayName = "Weapon Smith"; break;
+//			case 3: displayName = "Tool Smith"; break;
+//			} break;
 		case BUTCHER:
 			switch( careerID ) {
 			default: displayName = "Butcher"; break;

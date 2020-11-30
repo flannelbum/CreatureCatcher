@@ -1,6 +1,7 @@
 name: ${name}
 version: ${version}
 description: ${description}
+api-version: 1.16
 author: ${author}
 website: ${url}
 

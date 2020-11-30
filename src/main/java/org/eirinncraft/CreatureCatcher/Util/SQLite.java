@@ -9,11 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.google.gson.Gson;
 import org.eirinncraft.CreatureCatcher.CreatureCatcher;
 import org.eirinncraft.CreatureCatcher.Creatures.CaughtCreature;
 import org.eirinncraft.CreatureCatcher.Creatures.CaughtCreatureFactory;
 
-import com.google.gson.Gson;
+
 
 
 public class SQLite extends Database{
@@ -113,11 +114,12 @@ public class SQLite extends Database{
 		
 		return creature;
 	}
-    
+
     
 	@Override
 	public void updateCreature(CaughtCreature creature) {
 		Gson gson = new Gson();
+		plugin.log("creature: " + creature.toString());
 		String json = gson.toJson(creature);
 		String sql = "INSERT OR REPLACE INTO CaughtCreature (token, entityType, creatureJSON) VALUES(?,?,?)";
 		

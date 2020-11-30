@@ -1,5 +1,6 @@
 package org.eirinncraft.CreatureCatcher;
 
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.eirinncraft.CreatureCatcher.Creatures.CaughtCreature;
@@ -27,19 +28,30 @@ public class CreatureCatcher extends JavaPlugin{
 	private CreatureCatcherListener ccListener;
 	private List<String> lore;
 	private Database db;
+
+	private int cmodelEmpty;
+	private int cmodelFull;
 	
 	private TestPlayerHandler tph;
 	
 	@Override
 	public void onEnable() {
-		
-		// force config save to ensure we have a folder for our database file
+
+		// some default config stuff before database stuff
+		this.cmodelEmpty = getConfig().getInt("creaturecatcher.CustomModelData.creature_catcher_empty");
+		this.cmodelFull = getConfig().getInt("creaturecatcher.CustomModelData.creature_catcher_full");
+		if( this.cmodelEmpty == 0 )
+			this.cmodelEmpty = 110401;
+		if( this.cmodelFull == 0 )
+			this.cmodelFull = 110402;
+		getConfig().set("creaturecatcher.CustomModelData.creature_catcher_empty", this.cmodelEmpty);
+		getConfig().set("creaturecatcher.CustomModelData.creature_catcher_full", this.cmodelFull);
 		saveConfig();
-		
+
+		// database stuff
 		db = new SQLite(this);
-		
+
 		getServer().getPluginManager().registerEvents(getCreatureCatcherListener(), this);
-		
 		getCommand("getcreaturecatcher").setExecutor(new CreatureCatcherCommand(this));
 			
 		log("enabled");
@@ -47,7 +59,7 @@ public class CreatureCatcher extends JavaPlugin{
 	
 	@Override
 	public void onDisable() {
-		
+
 		getConfig().set("creaturecatcher.testplayers", getTestPlayerHandler().getTestPlayers());
 		saveConfig();
 
@@ -75,18 +87,15 @@ public class CreatureCatcher extends JavaPlugin{
 	public List<String> getLore() {
 		if( lore == null ){
 			lore = new ArrayList<String>();
-			lore.add("CreatureCatcher");
-			lore.add("");
-			lore.add("Testing the MobCatcher");
-			lore.add("Item subject to change");
-			lore.add("There may be bugs!");
+			lore.add("Catch and Release");
+			lore.add("them creatures!");
 		}
 		return lore;
 	}
 	
 	
-	public boolean isMobCaptureItem(ItemStack item) {
-		if( item.getType().equals(Material.WOOD_HOE) )
+	public boolean isCreatureCaptureItem(ItemStack item) {
+		if( item.getType().equals(Material.WOODEN_HOE) )
 			if( item.hasItemMeta() )
 				if( item.getItemMeta().hasLore() )					
 					if( getLore().get(0).equals(item.getItemMeta().getLore().get(0)) )
@@ -96,7 +105,7 @@ public class CreatureCatcher extends JavaPlugin{
 	
 
 	public boolean isEmptyCaptureItem(ItemStack item){
-		if( item.getType().equals(Material.WOOD_HOE) )
+		if( item.getType().equals(Material.WOODEN_HOE) )
 			if( item.hasItemMeta() )
 				if( item.getItemMeta().hasLore() ) {
 					// If we have an extra line in our lore, it should be our token
@@ -109,8 +118,8 @@ public class CreatureCatcher extends JavaPlugin{
 	}
 
 	
-	public ItemStack getMobCatcher() {
-		ItemStack item = new ItemStack(Material.WOOD_HOE);
+	public ItemStack getCreatureCatcherItem() {
+		ItemStack item = new ItemStack(Material.WOODEN_HOE);
 		ItemMeta meta = item.getItemMeta();
 
 		meta.setLore( getLore() );
@@ -119,16 +128,17 @@ public class CreatureCatcher extends JavaPlugin{
 
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-		
+
+		meta.setCustomModelData(this.cmodelEmpty);
+
 		item.setItemMeta(meta);
-		item.setDurability((short) 1);
-		
+
 		return item;
 	}
 	
 	//OVERLOAD with displayname and token
-	public ItemStack getMobCatcher(String displayname, String token){
-		ItemStack item = new ItemStack(Material.WOOD_HOE);
+	public ItemStack getCreatureCatcherItem(String displayname, String token){
+		ItemStack item = new ItemStack(Material.WOODEN_HOE);
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
 		
@@ -139,14 +149,15 @@ public class CreatureCatcher extends JavaPlugin{
 		lore.add( token );
 		meta.setLore( lore );
 		
-		meta.setDisplayName("CreatureCatcher - " + displayname);
+		meta.setDisplayName("Caught: " + displayname);
 
 		meta.setUnbreakable(true);
 		meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS);
 
+		meta.setCustomModelData(this.cmodelFull);
+
 		item.setItemMeta(meta);
-		item.setDurability((short) 2);
 		
 		return item;
 	}
@@ -164,7 +175,7 @@ public class CreatureCatcher extends JavaPlugin{
 				if( ((Tameable) entity).getOwner() != null )
 					if( !((Tameable) entity).getOwner().getUniqueId().equals( player.getUniqueId() ) )
 						if( !player.hasPermission("creaturecatcher.catchothers") ){
-							player.sendMessage("You do not own this creature");
+							player.sendMessage(((Tameable) entity).getOwner().getName() + "'s creature.  You may not capture it.");
 							return;
 						} 
 
@@ -177,7 +188,7 @@ public class CreatureCatcher extends JavaPlugin{
 		
 		entity.remove();
 
-		player.getInventory().setItemInMainHand( getMobCatcher(creature.getDisplayName(), creature.getToken()) );
+		player.getInventory().setItemInMainHand( getCreatureCatcherItem(creature.getDisplayName(), creature.getToken()) );
 		
 		log(player.getName() + " made token: " + creature.getToken() + " (" + creature.getType() + "): " + creature.getDisplayName());
 
@@ -200,7 +211,7 @@ public class CreatureCatcher extends JavaPlugin{
 			log(player.getName() + " used token: " + token + " (" + creature.getType() + "): " + creature.getDisplayName());
 			
 			db.deleteCreature(token);
-			player.getInventory().setItemInMainHand(getMobCatcher());
+			player.getInventory().setItemInMainHand(getCreatureCatcherItem());
 			
 		} else {
 			log("CREATURE RESTORE ISSUE: " + player.getName() + " tried to restore token: " + token);

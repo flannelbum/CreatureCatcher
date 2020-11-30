@@ -6,12 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Ageable;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Sittable;
-import org.bukkit.entity.Tameable;
+import org.bukkit.entity.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,16 +21,18 @@ public abstract class CaughtCreature {
 	//core attributes
 	@Getter
 	private HashMap<Attribute,Double> attributeMap = new HashMap<Attribute,Double>();
-	
+
 	//Ageable
 	@Getter 
 	private int age;
-	@Getter 
-	private boolean ageLock;
 	@Getter
 	private boolean adult;
+
+	//Breedable
 	@Getter
-	private boolean breadable;
+	private boolean agelock;
+	@Getter
+	private boolean canbreed;
 	
 	//Tameable
 	@Getter
@@ -73,13 +70,17 @@ public abstract class CaughtCreature {
 			if( creature.getAttribute( attribute ) != null ){
 				attributeMap.put( attribute, creature.getAttribute( attribute ).getBaseValue() );
 			}
-		
+
 		//Ageable
 		if( creature instanceof Ageable ){
 			this.age = ((Ageable) creature).getAge();
-			this.ageLock = ((Ageable) creature).getAgeLock();
 			this.adult = ((Ageable) creature).isAdult();
-			this.breadable = ((Ageable) creature).canBreed();
+		}
+
+		//Breedable
+		if( creature instanceof Breedable ){
+			this.agelock = ((Breedable) creature).getAgeLock();
+			this.canbreed = ((Breedable) creature).canBreed();
 		}
 		
 		//Tameable
@@ -120,17 +121,20 @@ public abstract class CaughtCreature {
 		location.setZ( location.getZ() +.5);
 		
 		Entity entity = location.getWorld().spawnEntity(location, type);
-	
+
 		//Ageable
 		if( entity instanceof Ageable ){
 			((Ageable) entity).setAge(age);
-			((Ageable) entity).setAgeLock(ageLock);
-			((Ageable) entity).setBreed(breadable);
-			
 			if( adult )
 				((Ageable) entity).setAdult();
 			else
 				((Ageable) entity).setBaby();
+		}
+
+		//Breedable
+		if( entity instanceof Breedable ){
+			((Breedable) entity).setBreed(canbreed);
+			((Breedable) entity).setAgeLock(agelock);
 		}
 		
 		//Tameable

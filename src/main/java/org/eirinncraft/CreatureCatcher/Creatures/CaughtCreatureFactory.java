@@ -26,6 +26,7 @@ public class CaughtCreatureFactory {
 		case PARROT: return new CaughtParrot(creature);
 		case VILLAGER: return new CaughtVillager(creature);
 		case RABBIT: return new CaughtRabbit(creature);
+		case CAT: return new CaughtCat(creature);
 		
 		default: return new CaughtGeneric(creature);
 		}
@@ -56,6 +57,7 @@ public class CaughtCreatureFactory {
 		case PARROT: return CaughtParrot.class;
 		case VILLAGER: return CaughtVillager.class;
 		case RABBIT: return CaughtRabbit.class;
+		case CAT: return CaughtCat.class;
 		
 		default: return CaughtGeneric.class;
 		}
@@ -80,6 +82,7 @@ public class CaughtCreatureFactory {
 			case VILLAGER: return true;
 			case WOLF: return true;
 			case RABBIT: return true;
+			case CAT: return true;
 			
 			// Ones that are generic
 			case BAT: return true;
@@ -94,7 +97,7 @@ public class CaughtCreatureFactory {
 			case GHAST: return true;
 			case MUSHROOM_COW: return true;
 			case OCELOT: return true;
-			case PIG_ZOMBIE: return true;
+//			case PIG_ZOMBIE: return true;
 			case POLAR_BEAR: return true;
 			case SHULKER: return true;
 			case SILVERFISH: return true;

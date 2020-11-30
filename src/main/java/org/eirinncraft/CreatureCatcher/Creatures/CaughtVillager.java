@@ -7,7 +7,6 @@ import java.util.List;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Villager;
-import org.bukkit.entity.Villager.Profession;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.eirinncraft.CreatureCatcher.Creatures.StoreMerchantRecipe.StoreMerchantRecipeBuilder;
@@ -18,28 +17,36 @@ import lombok.Getter;
 public class CaughtVillager extends CaughtCreature {
 
 	@Getter 
-	private Profession profession;
+	private Villager.Profession profession;
 	@Getter
-	private int riches;
+	private Villager.Type villagerType;
+	@Getter
+	private int villagerLevel;
+	@Getter
+	private int villagerExperience;
 	@Getter
 	private String inventory;
 	@Getter
 	private List<StoreMerchantRecipe> storedRecipes = new ArrayList<StoreMerchantRecipe>();
-	@Getter
-	private int careerID;
-	@Getter
-	private int careerLevel;
+//	@Getter
+//	private int careerID;
+//	@Getter
+//	private int careerLevel;
 	
 	public CaughtVillager(Creature creature) {
 		super(creature);
 		
-		VillagerCareerInterface vci = VillagerCareerWrapper.Wrap( ((Villager) creature) );
-		this.careerID = vci.getCareerID();
-		this.careerLevel = vci.getCareerLevel();
-		this.setDisplayName( vci.getAdjustedProfessionName() );
+//		VillagerCareerInterface vci = VillagerCareerWrapper.Wrap( ((Villager) creature) );
+//		this.careerID = vci.getCareerID();
+//		this.careerLevel = vci.getCareerLevel();
+//		this.setDisplayName( vci.getAdjustedProfessionName() );
+
+
 		this.profession = ((Villager) creature).getProfession();
-				
-		this.riches = ((Villager) creature).getRiches();
+		this.villagerType = ((Villager) creature).getVillagerType();
+		this.villagerLevel = ((Villager) creature).getVillagerLevel();
+		this.villagerExperience = ((Villager) creature).getVillagerExperience();
+
 		this.inventory = B64Util.itemStackArrayToBase64(((Villager) creature).getInventory().getContents());
 		
 		// This merchant stuff is kinda nuts.  Consider revising
@@ -53,6 +60,8 @@ public class CaughtVillager extends CaughtCreature {
 					.uses( recipe.getUses() )
 					.maxUses( recipe.getMaxUses() )
 					.experienceReward( recipe.hasExperienceReward() )
+					.villagerExperience( recipe.getVillagerExperience() )
+					.priceMultiplier( recipe.getPriceMultiplier() )
 					.build()
 					);
 		}
@@ -62,13 +71,15 @@ public class CaughtVillager extends CaughtCreature {
 
 	@Override
 	public void additionalSets(Entity entity) {
-		VillagerCareerInterface vci = VillagerCareerWrapper.Wrap( ((Villager) entity) );
-		vci.setCareerID( careerID );
-		vci.setCareerLevel( careerLevel );
+//		VillagerCareerInterface vci = VillagerCareerWrapper.Wrap( ((Villager) entity) );
+//		vci.setCareerID( careerID );
+//		vci.setCareerLevel( careerLevel );
 		
 		((Villager) entity).setProfession(profession);
-		((Villager) entity).setRiches(riches);
-		
+		((Villager) entity).setVillagerType(villagerType);
+		((Villager) entity).setVillagerLevel(villagerLevel);
+		((Villager) entity).setVillagerExperience(villagerExperience);
+
 		// Again, consider revising this rats-nest
 		try {
 			((Villager) entity).getInventory().setContents( B64Util.itemStackArrayFromBase64( inventory ));
@@ -81,7 +92,9 @@ public class CaughtVillager extends CaughtCreature {
 							result[0],
 							recipe.getUses(), 
 							recipe.getMaxUses(), 
-							recipe.experienceReward() );
+							recipe.experienceReward(),
+							recipe.getVillagerExperience(),
+							recipe.getPriceMultiplier() );
 					mr.setIngredients( B64Util.itemListFromBase64( recipe.getIngredients() ));
 					recipes.add( mr );
 			}		
@@ -95,22 +108,3 @@ public class CaughtVillager extends CaughtCreature {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
