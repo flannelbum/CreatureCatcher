@@ -78,9 +78,8 @@ public class CreatureCatcher extends JavaPlugin{
 			lore = new ArrayList<String>();
 			lore.add("CreatureCatcher");
 			lore.add("");
-			lore.add("Test CreatureCatcher");
-			lore.add("Item subject to change");
-			lore.add("There may be bugs!");
+			lore.add("Catch and Release");
+			lore.add("them creatures!");
 		}
 		return lore;
 	}
@@ -121,7 +120,7 @@ public class CreatureCatcher extends JavaPlugin{
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
 
-		((Damageable) meta).setDamage((short) 1);
+		meta.setCustomModelData(110401);
 
 		item.setItemMeta(meta);
 
@@ -147,7 +146,7 @@ public class CreatureCatcher extends JavaPlugin{
 		meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS);
 
-		((Damageable) meta).setDamage((short) 2);
+		meta.setCustomModelData(110402);
 
 		item.setItemMeta(meta);
 		
