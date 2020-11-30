@@ -1,10 +1,10 @@
 # CreatureCatcher
 
-### CreatureCatcher is yet another mob catcher plugin for spigot 1.12+  
-Currently still in testing - please report any issues.
+### CreatureCatcher is yet another mob catcher plugin for Minecraft
+* built for spigot 1.16.4
+ 
+In-game, use **/getcreaturecatcher** to spawn in the CreatureCatcher.  Use it by right-clicking a creature tot capture it.  Right-click again to release the creature.
 
-In-game, use **/getcreaturecatcher** to spawn in, for now, an enchanted wooden hoe.  This CreatureCatcher can then be used to capture and place a mob by right-clicking.
+A custom item can be used versus the default wooden_hoe.  
 
-
-#### Compiled Dependencies
-[lombok](https://projectlombok.org/) to help with some boilerplate.
+Please report any bugs or issues.
