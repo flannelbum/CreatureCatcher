@@ -8,3 +8,16 @@ In-game, use **/getcreaturecatcher** to spawn in the CreatureCatcher.  Use it by
 A custom item can be used versus the default wooden_hoe.  
 
 Please report any bugs or issues.
+
+
+Known issues:
++ villagers forget profession and blank out if not traded with
++ villagers aren't "owned" and any can be picked up by anybody
++ mobs with armor will not come back with armor
++ Interactions
+    + mcmmo will ready a hoe
+    + shift-click ground with catcher in off-hand tills soil
+    
+Missing Mobs:
++ turtles
++ some nether folks
