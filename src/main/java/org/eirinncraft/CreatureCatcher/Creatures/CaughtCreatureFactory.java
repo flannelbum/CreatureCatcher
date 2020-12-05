@@ -17,17 +17,24 @@ public class CaughtCreatureFactory {
 		case DONKEY: return new CaughtHorse(creature);
 		case ZOMBIE_HORSE: return new CaughtHorse(creature);
 		case SKELETON_HORSE: return new CaughtHorse(creature);
-		
 		case PIG: return new CaughtPig(creature);
 		case SHEEP: return new CaughtSheep(creature);
-		
 		case WOLF: return new CaughtWolf(creature);
 		case LLAMA: return new CaughtLlama(creature);
 		case PARROT: return new CaughtParrot(creature);
 		case VILLAGER: return new CaughtVillager(creature);
 		case RABBIT: return new CaughtRabbit(creature);
 		case CAT: return new CaughtCat(creature);
-		
+//			case ZOMBIE_VILLAGER: return true;
+//			case IRON_GOLEM: return true;
+//			case PILLAGER: return true;
+//			case HOGLIN: return true;
+//			case PIGLIN: return true;
+//			case FOX: return true;
+//			case BEE: return true:
+//			case STRIDER: return true;
+//			case PANDA: return true;
+
 		default: return new CaughtGeneric(creature);
 		}
 
@@ -48,17 +55,24 @@ public class CaughtCreatureFactory {
 		case DONKEY: return CaughtHorse.class;
 		case ZOMBIE_HORSE: return CaughtHorse.class;
 		case SKELETON_HORSE: return CaughtHorse.class;
-		
 		case PIG: return CaughtPig.class;
 		case SHEEP: return CaughtSheep.class;
-		
 		case WOLF: return CaughtWolf.class;
 		case LLAMA: return CaughtLlama.class;
 		case PARROT: return CaughtParrot.class;
 		case VILLAGER: return CaughtVillager.class;
 		case RABBIT: return CaughtRabbit.class;
 		case CAT: return CaughtCat.class;
-		
+//			case ZOMBIE_VILLAGER: return true;
+//			case IRON_GOLEM: return true;
+//			case PILLAGER: return true;
+//			case HOGLIN: return true;
+//			case PIGLIN: return true;
+//			case FOX: return true;
+//			case BEE: return true:
+//			case STRIDER: return true;
+//			case PANDA: return true;
+
 		default: return CaughtGeneric.class;
 		}
 		
@@ -91,6 +105,7 @@ public class CaughtCreatureFactory {
 //			case BEE: return true:
 //			case STRIDER: return true;
 //			case PANDA: return true;
+
 
 			// Ones that are generic
 			case ZOGLIN: return true;
