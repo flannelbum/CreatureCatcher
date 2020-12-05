@@ -1,6 +1,5 @@
 package org.eirinncraft.CreatureCatcher;
 
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.eirinncraft.CreatureCatcher.Creatures.CaughtCreature;

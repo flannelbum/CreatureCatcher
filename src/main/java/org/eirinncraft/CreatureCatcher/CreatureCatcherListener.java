@@ -6,6 +6,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -13,6 +14,7 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.eirinncraft.CreatureCatcher.Creatures.CaughtCreatureFactory;
+
 
 public class CreatureCatcherListener implements Listener {
 
@@ -30,10 +32,11 @@ public class CreatureCatcherListener implements Listener {
 	}
 	
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent e){
-		if( e.isCancelled() )
+		if( e.isCancelled() ) {
 			return;
+		}
 
 		Player player = e.getPlayer();
 		Location location = player.getLocation().clone();
@@ -61,15 +64,16 @@ public class CreatureCatcherListener implements Listener {
 
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerInteractEvent(PlayerInteractEvent e){
-
 		if( e instanceof Cancellable )
 			if( ((Cancellable) e).isCancelled() )
 				return;
-		
+
 		Player player = e.getPlayer();
-		ItemStack item = player.getInventory().getItemInMainHand();
+		ItemStack item = e.getItem();
+		if( item == null )
+			return;
 
 		if( plugin.isCreatureCaptureItem( item ) ) {
 			// prevent any action from this item by canceling this event

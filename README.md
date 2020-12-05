@@ -14,10 +14,6 @@ Known issues:
 + villagers forget profession and blank out if not traded with
 + villagers aren't "owned" and any can be picked up by anybody
 + mobs with armor will not come back with armor
-+ Interactions
-    + mcmmo will ready a hoe
-    + shift-click ground with catcher in off-hand tills soil
-
 
 Missing Mobs:
 + ZOMBIE_VILLAGER
