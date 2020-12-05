@@ -25,7 +25,7 @@ public class CaughtCreatureFactory {
 		case VILLAGER: return new CaughtVillager(creature);
 		case RABBIT: return new CaughtRabbit(creature);
 		case CAT: return new CaughtCat(creature);
-//			case ZOMBIE_VILLAGER: return true;
+		case ZOMBIE_VILLAGER: return new CaughtZombieVillager(creature);
 //			case IRON_GOLEM: return true;
 //			case PILLAGER: return true;
 //			case HOGLIN: return true;
@@ -63,7 +63,7 @@ public class CaughtCreatureFactory {
 		case VILLAGER: return CaughtVillager.class;
 		case RABBIT: return CaughtRabbit.class;
 		case CAT: return CaughtCat.class;
-//			case ZOMBIE_VILLAGER: return true;
+		case ZOMBIE_VILLAGER: return CaughtZombieVillager.class;
 //			case IRON_GOLEM: return true;
 //			case PILLAGER: return true;
 //			case HOGLIN: return true;
@@ -96,7 +96,7 @@ public class CaughtCreatureFactory {
 			case WOLF: return true;
 			case RABBIT: return true;
 			case CAT: return true;
-//			case ZOMBIE_VILLAGER: return true;
+			case ZOMBIE_VILLAGER: return true;
 //			case IRON_GOLEM: return true;
 //			case PILLAGER: return true;
 //			case HOGLIN: return true;

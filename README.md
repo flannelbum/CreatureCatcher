@@ -16,7 +16,6 @@ Known issues:
 + mobs with armor will not come back with armor
 
 Missing Mobs:
-+ ZOMBIE_VILLAGER
 + IRON_GOLEM
 + PILLAGER
 + HOGLIN
