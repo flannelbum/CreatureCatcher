@@ -67,14 +67,13 @@ public class CaughtCreatureFactory {
 	
 	public static boolean validEntityType(Entity entity){
 		switch(entity.getType()){
-			
+
 			// Ones that need special handling
 			case HORSE: return true;
 			case MULE: return true;
 			case DONKEY: return true;
 			case ZOMBIE_HORSE: return true;
 			case SKELETON_HORSE: return true;
-			
 			case LLAMA: return true;
 			case PARROT: return true;
 			case PIG: return true;
@@ -83,8 +82,19 @@ public class CaughtCreatureFactory {
 			case WOLF: return true;
 			case RABBIT: return true;
 			case CAT: return true;
-			
+//			case ZOMBIE_VILLAGER: return true;
+//			case IRON_GOLEM: return true;
+//			case PILLAGER: return true;
+//			case HOGLIN: return true;
+//			case PIGLIN: return true;
+//			case FOX: return true;
+//			case BEE: return true:
+//			case STRIDER: return true;
+//			case PANDA: return true;
+
 			// Ones that are generic
+			case ZOGLIN: return true;
+			case TURTLE: return true;
 			case BAT: return true;
 			case BLAZE: return true;
 			case CAVE_SPIDER: return true;
@@ -97,7 +107,6 @@ public class CaughtCreatureFactory {
 			case GHAST: return true;
 			case MUSHROOM_COW: return true;
 			case OCELOT: return true;
-//			case PIG_ZOMBIE: return true;
 			case POLAR_BEAR: return true;
 			case SHULKER: return true;
 			case SILVERFISH: return true;

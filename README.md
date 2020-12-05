@@ -17,7 +17,15 @@ Known issues:
 + Interactions
     + mcmmo will ready a hoe
     + shift-click ground with catcher in off-hand tills soil
-    
+
+
 Missing Mobs:
-+ turtles
-+ some nether folks
++ ZOMBIE_VILLAGER
++ IRON_GOLEM
++ PILLAGER
++ HOGLIN
++ PIGLIN
++ FOX
++ BEE
++ STRIDER
++ PANDA
