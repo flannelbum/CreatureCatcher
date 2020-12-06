@@ -27,8 +27,7 @@ public class CaughtCreatureFactory {
 		case CAT: return new CaughtCat(creature);
 		case ZOMBIE_VILLAGER: return new CaughtZombieVillager(creature);
 		case IRON_GOLEM: return new CaughtIronGolem(creature);
-//			case PILLAGER: return true;
-//			case HOGLIN: return true;
+		case HOGLIN: return new CaughtHoglin(creature);
 //			case PIGLIN: return true;
 //			case FOX: return true;
 //			case BEE: return true:
@@ -65,9 +64,7 @@ public class CaughtCreatureFactory {
 		case CAT: return CaughtCat.class;
 		case ZOMBIE_VILLAGER: return CaughtZombieVillager.class;
 		case IRON_GOLEM: return CaughtIronGolem.class;
-//			case IRON_GOLEM: return true;
-//			case PILLAGER: return true;
-//			case HOGLIN: return true;
+		case HOGLIN: return CaughtHoglin.class;
 //			case PIGLIN: return true;
 //			case FOX: return true;
 //			case BEE: return true:
@@ -99,9 +96,8 @@ public class CaughtCreatureFactory {
 			case CAT: return true;
 			case ZOMBIE_VILLAGER: return true;
 			case IRON_GOLEM: return true;
-//			case PILLAGER: return true;
-//			case HOGLIN: return true;
-//			case PIGLIN: return true;
+			case HOGLIN: return true;
+			case PIGLIN: return true;
 //			case FOX: return true;
 //			case BEE: return true:
 //			case STRIDER: return true;
@@ -109,6 +105,7 @@ public class CaughtCreatureFactory {
 
 
 			// Ones that are generic
+			case PILLAGER: return true;
 			case ZOGLIN: return true;
 			case TURTLE: return true;
 			case BAT: return true;
