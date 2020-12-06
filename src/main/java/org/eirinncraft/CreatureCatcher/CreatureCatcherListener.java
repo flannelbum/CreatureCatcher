@@ -6,7 +6,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -30,9 +29,9 @@ public class CreatureCatcherListener implements Listener {
 		PlayerInteractEntityEvent.getHandlerList().unregister(this);
 		PlayerInteractEvent.getHandlerList().unregister(this);
 	}
-	
-	
-	@EventHandler(priority = EventPriority.HIGHEST)
+
+
+	@EventHandler
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent e){
 		if( e.isCancelled() ) {
 			return;
@@ -63,8 +62,9 @@ public class CreatureCatcherListener implements Listener {
 				}
 
 	}
-	
-	@EventHandler(priority = EventPriority.HIGHEST)
+
+
+	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent e){
 		if( e instanceof Cancellable )
 			if( ((Cancellable) e).isCancelled() )
