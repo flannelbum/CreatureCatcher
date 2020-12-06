@@ -19,10 +19,6 @@ Known issues:
 
 
 Missing Mobs:
-+ PILLAGER
-+ HOGLIN
-+ PIGLIN
 + FOX
-+ BEE
-+ STRIDER
-+ PANDA
++ pillagers/nether may need more work
+
