@@ -28,11 +28,11 @@ public class CaughtCreatureFactory {
 		case ZOMBIE_VILLAGER: return new CaughtZombieVillager(creature);
 		case IRON_GOLEM: return new CaughtIronGolem(creature);
 		case HOGLIN: return new CaughtHoglin(creature);
-//			case PIGLIN: return true;
-//			case FOX: return true;
-//			case BEE: return true:
-//			case STRIDER: return true;
-//			case PANDA: return true;
+		case PIGLIN: return new CaughtPiglin(creature);
+//		case FOX: return new CaughtFox(creature);
+		case BEE: return new CaughtBee(creature);
+		case STRIDER: return new CaughtStrider(creature);
+		case PANDA: return new CaughtPanda(creature);
 
 		default: return new CaughtGeneric(creature);
 		}
@@ -65,11 +65,11 @@ public class CaughtCreatureFactory {
 		case ZOMBIE_VILLAGER: return CaughtZombieVillager.class;
 		case IRON_GOLEM: return CaughtIronGolem.class;
 		case HOGLIN: return CaughtHoglin.class;
-//			case PIGLIN: return true;
-//			case FOX: return true;
-//			case BEE: return true:
-//			case STRIDER: return true;
-//			case PANDA: return true;
+		case PIGLIN: return CaughtPiglin.class;
+//		case FOX: return CaughtFox.class;
+		case BEE: return CaughtBee.class;
+		case STRIDER: return CaughtStrider.class;
+		case PANDA: return CaughtPanda.class;
 
 		default: return CaughtGeneric.class;
 		}
@@ -99,9 +99,9 @@ public class CaughtCreatureFactory {
 			case HOGLIN: return true;
 			case PIGLIN: return true;
 //			case FOX: return true;
-//			case BEE: return true:
-//			case STRIDER: return true;
-//			case PANDA: return true;
+			case BEE: return true;
+			case STRIDER: return true;
+			case PANDA: return true;
 
 
 			// Ones that are generic
