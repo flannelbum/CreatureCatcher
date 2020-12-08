@@ -1,5 +1,8 @@
 package org.eirinncraft.CreatureCatcher.Creatures;
 
+import org.eirinncraft.CreatureCatcher.Util.B64Util;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -11,6 +14,8 @@ import org.bukkit.entity.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 
 
 public abstract class CaughtCreature {
@@ -41,6 +46,10 @@ public abstract class CaughtCreature {
 	private UUID ownerUUID;
 	@Getter
 	private String ownerName;
+
+	//Equipment
+	@Getter
+	private HashMap<EquipmentSlot,String> equipment;
 	
 	@Getter
 	private EntityType type;
@@ -91,8 +100,15 @@ public abstract class CaughtCreature {
 				this.ownerName = ((Tameable) creature).getOwner().getName();
 			}
 		}
-		
-		
+
+		//Equipment
+		this.equipment = new HashMap<EquipmentSlot, String>();
+		if( creature.getEquipment() != null )
+			for( EquipmentSlot slot : EquipmentSlot.values() )
+				if( creature.getEquipment().getItem( slot ) != null )
+					this.equipment.put(slot, B64Util.itemStackArrayToBase64( new ItemStack[]{ creature.getEquipment().getItem( slot ) }) );
+
+
 		this.type = creature.getType();
 		this.name = creature.getName();
 		this.customName = creature.getCustomName();
@@ -148,11 +164,23 @@ public abstract class CaughtCreature {
 		if( entity instanceof Sittable ){
 			((Sittable) entity).setSitting(true);
 		}
-		
+
 		additionalSets(entity);
 		
 		Creature creature = (Creature) entity;
-		
+
+		//Equipment
+		if( this.equipment != null )
+			for( EquipmentSlot slot : EquipmentSlot.values() )
+				if( this.equipment.containsKey( slot ) ) {
+					try {
+						creature.getEquipment().setItem(slot, B64Util.itemStackArrayFromBase64( this.equipment.get( slot ) )[0]);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+
 		//core attributes
 		for( Entry<Attribute,Double> entry : attributeMap.entrySet() )
 			creature.getAttribute( entry.getKey() ).setBaseValue( entry.getValue() );
@@ -163,7 +191,7 @@ public abstract class CaughtCreature {
 		creature.setHealth(health);
 		creature.setAI(hasAI);
 		creature.setRemoveWhenFarAway(removeWhenFarAway);
-		
+
 		// tweak location again to raise entity
 		location.setY( location.getY() + 3 );
 		entity.teleport(location);

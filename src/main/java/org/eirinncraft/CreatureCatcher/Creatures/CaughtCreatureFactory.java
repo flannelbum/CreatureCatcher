@@ -29,7 +29,7 @@ public class CaughtCreatureFactory {
 		case IRON_GOLEM: return new CaughtIronGolem(creature);
 		case HOGLIN: return new CaughtHoglin(creature);
 		case PIGLIN: return new CaughtPiglin(creature);
-//		case FOX: return new CaughtFox(creature);
+		case FOX: return new CaughtFox(creature);
 		case BEE: return new CaughtBee(creature);
 		case STRIDER: return new CaughtStrider(creature);
 		case PANDA: return new CaughtPanda(creature);
@@ -66,7 +66,7 @@ public class CaughtCreatureFactory {
 		case IRON_GOLEM: return CaughtIronGolem.class;
 		case HOGLIN: return CaughtHoglin.class;
 		case PIGLIN: return CaughtPiglin.class;
-//		case FOX: return CaughtFox.class;
+		case FOX: return CaughtFox.class;
 		case BEE: return CaughtBee.class;
 		case STRIDER: return CaughtStrider.class;
 		case PANDA: return CaughtPanda.class;
@@ -98,13 +98,14 @@ public class CaughtCreatureFactory {
 			case IRON_GOLEM: return true;
 			case HOGLIN: return true;
 			case PIGLIN: return true;
-//			case FOX: return true;
+			case FOX: return true;
 			case BEE: return true;
 			case STRIDER: return true;
 			case PANDA: return true;
 
 
 			// Ones that are generic
+			case STRAY: return true;
 			case PILLAGER: return true;
 			case ZOGLIN: return true;
 			case TURTLE: return true;

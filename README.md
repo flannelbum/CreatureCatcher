@@ -13,12 +13,11 @@ Please report any bugs or issues.
 Known issues:
 + villagers forget profession and blank out if not traded with
 + villagers aren't "owned" and any can be picked up by anybody
-+ mobs with armor will not come back with armor
 + Interactions
     + mcmmo will ready a hoe
 
 
 Missing Mobs:
-+ FOX
-+ pillagers/nether may need more work
++ (mostly intentional) Wandering Traders and their llamas
++ pillagers/nether may need more work.
 
