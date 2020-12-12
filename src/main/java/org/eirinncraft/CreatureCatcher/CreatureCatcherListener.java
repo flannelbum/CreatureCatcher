@@ -14,6 +14,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.eirinncraft.CreatureCatcher.Creatures.CaughtCreatureFactory;
 
+
 public class CreatureCatcherListener implements Listener {
 
 	private CreatureCatcher plugin;
@@ -28,12 +29,13 @@ public class CreatureCatcherListener implements Listener {
 		PlayerInteractEntityEvent.getHandlerList().unregister(this);
 		PlayerInteractEvent.getHandlerList().unregister(this);
 	}
-	
-	
+
+
 	@EventHandler
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent e){
-		if( e.isCancelled() )
+		if( e.isCancelled() ) {
 			return;
+		}
 
 		Player player = e.getPlayer();
 		Location location = player.getLocation().clone();
@@ -60,16 +62,18 @@ public class CreatureCatcherListener implements Listener {
 				}
 
 	}
-	
+
+
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent e){
-
 		if( e instanceof Cancellable )
 			if( ((Cancellable) e).isCancelled() )
 				return;
-		
+
 		Player player = e.getPlayer();
-		ItemStack item = player.getInventory().getItemInMainHand();
+		ItemStack item = e.getItem();
+		if( item == null )
+			return;
 
 		if( plugin.isCreatureCaptureItem( item ) ) {
 			// prevent any action from this item by canceling this event

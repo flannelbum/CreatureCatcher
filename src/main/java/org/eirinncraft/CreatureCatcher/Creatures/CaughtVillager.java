@@ -28,19 +28,10 @@ public class CaughtVillager extends CaughtCreature {
 	private String inventory;
 	@Getter
 	private List<StoreMerchantRecipe> storedRecipes = new ArrayList<StoreMerchantRecipe>();
-//	@Getter
-//	private int careerID;
-//	@Getter
-//	private int careerLevel;
+
 	
 	public CaughtVillager(Creature creature) {
 		super(creature);
-		
-//		VillagerCareerInterface vci = VillagerCareerWrapper.Wrap( ((Villager) creature) );
-//		this.careerID = vci.getCareerID();
-//		this.careerLevel = vci.getCareerLevel();
-//		this.setDisplayName( vci.getAdjustedProfessionName() );
-
 
 		this.profession = ((Villager) creature).getProfession();
 		this.villagerType = ((Villager) creature).getVillagerType();
@@ -71,10 +62,7 @@ public class CaughtVillager extends CaughtCreature {
 
 	@Override
 	public void additionalSets(Entity entity) {
-//		VillagerCareerInterface vci = VillagerCareerWrapper.Wrap( ((Villager) entity) );
-//		vci.setCareerID( careerID );
-//		vci.setCareerLevel( careerLevel );
-		
+
 		((Villager) entity).setProfession(profession);
 		((Villager) entity).setVillagerType(villagerType);
 		((Villager) entity).setVillagerLevel(villagerLevel);
